@@ -1,0 +1,33 @@
+##Шаблон веб-страницы (templates/index.html):
+##Создайте папку templates в той же директории, что и server.py, и создайте файл index.html 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Текущий пароль</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #password { font-size: 48px; margin-bottom: 20px; }
+        #timer { font-size: 24px; color: gray; }
+    </style>
+</head>
+<body>
+    <div id="password">{{ password }}</div>
+    <div id="timer">Обновится через <span id="remaining_time">{{ remaining_time }}</span> секунд</div>
+
+    <script>
+        var remainingTime = {{ remaining_time }};
+        var timerElement = document.getElementById('remaining_time');
+
+        setInterval(function() {
+            remainingTime -= 1;
+            if (remainingTime >= 0) {
+                timerElement.textContent = remainingTime;
+            } else {
+                location.reload();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
